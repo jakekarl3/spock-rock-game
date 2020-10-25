@@ -37,6 +37,19 @@ function resetSelected() {
   });
 }
 
+// Reset score & playerChoice/computerChoice
+function resetAll() {
+  playerScoreNumber = 0;
+  computerScoreNumber = 0;
+  computerChoice = '';
+  playerScoreEl.textContent = playerScoreNumber;
+  computerScoreEl.textContent = computerScoreNumber;
+  playerChoiceEl.textContent = ' --- Choice';
+  computerChoiceEl.textContent = ' --- Choice';
+  resultText.textContent = '';
+  resetSelected();
+}
+
 // Random computer choice
 function computerRandomChoice() {
   const computerChoiceNumber = Math.random();
@@ -84,19 +97,17 @@ function dipslayComputerChoice() {
 
 // Check result, increase scores, upudate resultText
 function updateScore(playerChoice) {
-  console.log(playerChoice, computerChoice);
   if (playerChoice === computerChoice) {
     resultText.textContent = "It's a tie.";
   } else {
     const choice = choices[playerChoice];
-    console.log(choice.defeats.indexOf(computerChoice));
     if (choice.defeats.indexOf(computerChoice) > -1) {
       resultText.textContent = 'You won!';
       playerScoreNumber++;
       playerScoreEl.textContent = playerScoreNumber;
     } else {
       resultText.textContent = 'You lost!';
-      computerScoreNumber--;
+      computerScoreNumber++;
       computerScoreEl.textContent = computerScoreNumber;
     }
   }
